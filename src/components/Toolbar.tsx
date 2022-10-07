@@ -8,15 +8,15 @@ import YumeetWhite from '../files/YUMEET_WHITE.svg';
 const Toolbar: React.FC = () => {
   return (
     <IonHeader>
-        <IonToolbar className='ion-text-center' color="secondary">
+        <IonToolbar mode="ios" style={{padding: "5px"}} color="secondary">
             <IonTitle>
                 <img src={YumeetWhite} className="yu-toolbar-logo"/>
             </IonTitle>
             <IonButtons slot="end">
-                <IonButton>
+                <IonButton className='ion-margin-end'>
                     <IonIcon icon={heart} />
                 </IonButton>
-                <IonButton>
+                <IonButton className='ion-margin-end'>
                     <IonIcon icon={chatbox} />
                 </IonButton>
             </IonButtons>
