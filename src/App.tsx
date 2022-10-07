@@ -33,11 +33,13 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Toolbar from './components/Toolbar';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
+    <Toolbar />
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
