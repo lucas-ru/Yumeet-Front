@@ -11,9 +11,12 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square, triangle } from 'ionicons/icons';
+
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
+
+import Toolbar from './components/Toolbar';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -33,14 +36,19 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import Toolbar from './components/Toolbar';
+
+import { useContext } from 'react';
+import { AuthContext } from './context/AuthProvider';
+import Login from './pages/auth/Login';
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <Toolbar />
+const App: React.FC = () => {
+  const { authValue }: any = useContext(AuthContext);
+
+  const privateRoute = (
     <IonReactRouter>
+      <Toolbar />
       <IonTabs>
         <IonRouterOutlet>
           <Route exact path="/tab1">
@@ -72,7 +80,26 @@ const App: React.FC = () => (
         </IonTabBar>
       </IonTabs>
     </IonReactRouter>
-  </IonApp>
-);
+  )
+
+  const publicRoute = (
+    <IonReactRouter>
+      <IonRouterOutlet>
+        <Route exact path="/login">
+          <Login />
+        </Route>
+        <Route exact path="/">
+          <Redirect to="/login" />
+        </Route>
+      </IonRouterOutlet>
+    </IonReactRouter>
+  )
+
+  return (
+    <IonApp>
+      { authValue.authenticated ? privateRoute : publicRoute }
+    </IonApp>
+  );
+}
 
 export default App;
