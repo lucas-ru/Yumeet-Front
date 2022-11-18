@@ -115,7 +115,7 @@ const App: React.FC = () => {
 
   return (
     <IonApp>
-      { /*authValue.authenticated ? privateRoute : publicRoute*/ privateRoute }
+      { authValue.authenticated ? privateRoute : publicRoute }
     </IonApp>
   );
 }
