@@ -1,0 +1,52 @@
+import {
+  IonApp,
+  IonLoading,
+  setupIonicReact
+} from '@ionic/react';
+
+/* Core CSS required for Ionic components to work properly */
+import '@ionic/react/css/core.css';
+
+/* Basic CSS for apps built with Ionic */
+import '@ionic/react/css/normalize.css';
+import '@ionic/react/css/structure.css';
+import '@ionic/react/css/typography.css';
+
+/* Optional CSS utils that can be commented out */
+import '@ionic/react/css/padding.css';
+import '@ionic/react/css/float-elements.css';
+import '@ionic/react/css/text-alignment.css';
+import '@ionic/react/css/text-transformation.css';
+import '@ionic/react/css/flex-utils.css';
+import '@ionic/react/css/display.css';
+
+/* Theme variables */
+import './theme/variables.css';
+import Routing from './components/routing/Routing';
+import { RouteContext } from './context/RouteProvider';
+import { useContext, useEffect, useState } from 'react';
+import { AppContext } from './context/AppProvider';
+
+setupIonicReact();
+
+const App = () => {
+  const {setShowTabs} = useContext(RouteContext);
+  const { isLoading } = useContext(AppContext);
+
+  console.log(isLoading)
+
+  useEffect(() => {
+    setShowTabs(true)
+  }, [])
+
+  return (
+    <IonApp>
+      <IonLoading 
+        isOpen={isLoading}
+      />
+      <Routing />
+    </IonApp>
+  );
+}
+
+export default App;

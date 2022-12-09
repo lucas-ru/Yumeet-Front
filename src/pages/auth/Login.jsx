@@ -1,23 +1,30 @@
-import { IonButton, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonRadio, IonRow, IonTitle, IonToolbar } from '@ionic/react';
-import { useContext, useRef } from 'react';
+import { IonButton, IonCol, IonContent, IonGrid, IonInput, IonItem, IonLabel, IonPage, IonRow } from '@ionic/react';
+import { useContext, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router';
 import { AuthContext } from '../../context/AuthProvider';
+import { RouteContext } from '../../context/RouteProvider';
 import { Toast } from '@capacitor/toast';
 
 import YumeetWhite from '../../files/YUMEET_WHITE.svg';
 
 import './Login.css'
 
-const Login: React.FC = () => {
-  const { login }: any = useContext(AuthContext);
-  const loginRef = useRef<HTMLIonInputElement>(null);
-  const pwdRef = useRef<HTMLIonInputElement>(null);
+const Login = () => {
+  const { login } = useContext(AuthContext);
+  const { setShowTabs } = useContext(RouteContext)
+  const loginRef = useRef(null);
+  const pwdRef = useRef(null);
   const history = useHistory();
+
+  useEffect(() => {
+    setShowTabs(false)
+  }, [])
 
   const submitLogin = async () => {
     try {
       const res = await login(loginRef.current?.value, pwdRef.current?.value)
       if (res.success) {
+        setShowTabs(true)
         history.push("/")
       } else {
         await Toast.show({

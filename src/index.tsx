@@ -4,14 +4,20 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './context/AuthProvider';
+import { RouteProvider } from './context/RouteProvider';
+import { AppProvider } from './context/AppProvider';
 
 const container = document.getElementById('root');
 const root = createRoot(container!);
 root.render(
   <React.StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <AppProvider>
+      <AuthProvider>
+        <RouteProvider>
+          <App />
+        </RouteProvider>
+      </AuthProvider>
+    </AppProvider>
   </React.StrictMode>
 );
 
