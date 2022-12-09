@@ -1,5 +1,6 @@
 import {
     IonIcon,
+    IonImg,
     IonLabel,
     IonRouterOutlet,
     IonTabBar,
@@ -12,13 +13,15 @@ import Toolbar from '../Toolbar';
 
 import { Redirect, Route } from 'react-router';
 
-import Tab1 from '../../pages/Tab1';
-import Tab2 from '../../pages/Tab2';
-import Tab3 from '../../pages/Tab3';
 import Login from '../../pages/auth/Login';
 
+import Publier from '../../pages/cuisinier/publier/Publier';
+import Accueil from '../../pages/commun/accueil/Accueil';
+import Profil from '../../pages/commun/profil/Profil';
+import Carte from '../../pages/consommateur/carte/Carte';
+import Panier from '../../pages/consommateur/panier/Panier';
+
 import { ellipse, square, triangle, personCircle } from 'ionicons/icons';
-import Profile from '../../pages/Profile';
 import { useContext } from 'react';
 import { RouteContext } from '../../context/RouteProvider';
 import { AuthContext } from '../../context/AuthProvider';
@@ -29,45 +32,52 @@ const Routing = () => {
     const { authValue } = useContext(AuthContext)
 
     const tabs = (
-      <IonTabBar slot="bottom">
-        <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
-        </IonTabButton>
-        <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
-        </IonTabButton>
-        <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon icon={square} />
-            <IonLabel>Tab 3</IonLabel>
-        </IonTabButton>
-        <IonTabButton tab="profile" href="/profile">
-            <IonIcon icon={personCircle} />
+        <IonTabBar slot="bottom">
+          <IonTabButton tab="accueil" href="/accueil">
+            <IonImg src='assets/icon/accueil.png' class='icon' />
+            <IonLabel>Accueil</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="publier" href="/publier">
+            <IonImg src='assets/icon/plus.png' class='icon' />
+            <IonLabel>Publier</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="carte" href="/carte">
+            <IonImg src='assets/icon/carte.png' class='icon' />
+            <IonLabel>Carte</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="panier" href="/panier">
+            <IonImg src='assets/icon/panier.png' class='icon' />
+            <IonLabel>Panier</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="profil" href="/profil">
+          <IonImg src='assets/icon/profil.png' class='icon' />
             <IonLabel>Profil</IonLabel>
-        </IonTabButton>
-      </IonTabBar>
+          </IonTabButton>
+        </IonTabBar>
     )
 
     const routing = (
         <>
-            <Route exact path="/tab1">
-                <Tab1 />
-            </Route>
-            <Route exact path="/tab2">
-                <Tab2 />
-            </Route>
-            <Route path="/tab3">
-                <Tab3 />
-            </Route>
             <Route exact path="/login">
                 <Login />
             </Route>
-            <PrivateRoute exact path="/profile" authenticated={authValue.authenticated}>
-                <Profile />
+            <PrivateRoute exact path="/profil" authenticated={authValue.authenticated}>
+                <Profil />
             </PrivateRoute>
+            <Route exact path="/accueil">
+                <Accueil />
+            </Route>
+            <Route exact path="/publier">
+                <Publier />
+            </Route>
+            <Route exact path="/carte">
+                <Carte />
+            </Route>
+            <Route exact path="/panier">
+                <Panier />
+            </Route>
             <Route exact path="/">
-                <Redirect to="/tab1" />
+                <Redirect to="/accueil" />
             </Route>
         </>
     )

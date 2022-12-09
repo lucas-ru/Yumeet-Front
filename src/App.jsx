@@ -22,6 +22,8 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import './App.css'
+
 import Routing from './components/routing/Routing';
 import { RouteContext } from './context/RouteProvider';
 import { useContext, useEffect, useState } from 'react';
@@ -30,10 +32,7 @@ import { AppContext } from './context/AppProvider';
 setupIonicReact();
 
 const App = () => {
-  const {setShowTabs} = useContext(RouteContext);
-  const { isLoading } = useContext(AppContext);
-
-  console.log(isLoading)
+  const { setShowTabs } = useContext(RouteContext);
 
   useEffect(() => {
     setShowTabs(true)
@@ -41,9 +40,6 @@ const App = () => {
 
   return (
     <IonApp>
-      <IonLoading 
-        isOpen={isLoading}
-      />
       <Routing />
     </IonApp>
   );
