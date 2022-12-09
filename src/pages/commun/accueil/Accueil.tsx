@@ -6,7 +6,6 @@ import './Accueil.css';
 const Accueil: React.FC = () => {
   const { authValue }: any = useContext(AuthContext);
 
-
   return (
     <IonPage>
       <IonContent fullscreen>

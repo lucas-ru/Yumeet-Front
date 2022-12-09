@@ -61,9 +61,6 @@ const Routing = () => {
             <Route exact path="/login">
                 <Login />
             </Route>
-            <PrivateRoute exact path="/profil" authenticated={authValue.authenticated}>
-                <Profil />
-            </PrivateRoute>
             <Route exact path="/accueil">
                 <Accueil />
             </Route>
@@ -76,6 +73,9 @@ const Routing = () => {
             <Route exact path="/panier">
                 <Panier />
             </Route>
+            <PrivateRoute exact path="/profil" authenticated={authValue.authenticated}>
+                <Profil />
+            </PrivateRoute>
             <Route exact path="/">
                 <Redirect to="/accueil" />
             </Route>
